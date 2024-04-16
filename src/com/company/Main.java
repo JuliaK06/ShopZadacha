@@ -14,6 +14,9 @@ try{
     while(sc.hasNext()){
         Laptop l=new Laptop();
         l.setYearOfProduction(sc.nextInt());
+        if(l.getYearOfProduction()>2020 && l.getYearOfProduction()<2016){
+            continue;
+        }
         l.setBrand(sc.next());
         l.setPrice(sc.nextDouble());
         l.setCity(sc.next());
@@ -28,13 +31,22 @@ try{
             for(Map.Entry<String, Integer>l2:list2){
                 if(l2.getKey().equals(m1.getKey())){
                     int n=l2.getValue();
-                    l2.setValue(n);
+                    l2.setValue(++n);
                 }
             }
             list2.add(m1);
         }
     }
+ for(int i=0;i<3;i++){
+     Map.Entry<String, Integer> m=list2.poll();
+     System.out.println(m.getKey()+": ");
+             for(Laptop a:list1){
+               if(  a.getBrand().equals(m.getKey())){
+                   System.out.println(a.getName()+", ");
+               }
 
+             }
+ }
 }
 catch(FileNotFoundException e){
     System.out.println("File not found");
