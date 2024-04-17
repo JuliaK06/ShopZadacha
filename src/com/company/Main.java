@@ -2,6 +2,7 @@ package com.company;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.*;
 
 public class Main {
@@ -14,15 +15,19 @@ try{
     while(sc.hasNext()){
         Laptop l=new Laptop();
         l.setYearOfProduction(sc.nextInt());
-        if(l.getYearOfProduction()>2020 && l.getYearOfProduction()<2016){
+        if(l.getYearOfProduction()>2020 && l.getYearOfProduction()<2015){
             continue;
         }
         l.setBrand(sc.next());
         l.setPrice(sc.nextDouble());
         l.setCity(sc.next());
+        if(!(l.getCity()=="София" || l.getCity()=="Бургас" || l.getCity()=="Варна" )){
+            continue;
+        }
         l.setName(sc.next());
         list1.add(l);
     }
+    sc.next();
     PriorityQueue<Map.Entry<String, Integer>> list2=new PriorityQueue<>(Collections.reverseOrder());
     for(Laptop l1:list1){
         if(l1.getPrice()<=2000.0) {
@@ -37,19 +42,26 @@ try{
             list2.add(m1);
         }
     }
+    File output = new File("output.txt");
+    PrintWriter p=new PrintWriter(output);
  for(int i=0;i<3;i++){
      Map.Entry<String, Integer> m=list2.poll();
-     System.out.println(m.getKey()+": ");
+     p.println(m.getKey()+": ");
              for(Laptop a:list1){
                if(  a.getBrand().equals(m.getKey())){
-                   System.out.println(a.getName()+", ");
+                   p.println(a.getName()+", ");
                }
 
              }
+             p.println('\n');
+
  }
-}
-catch(FileNotFoundException e){
+
+} catch(FileNotFoundException e){
     System.out.println("File not found");
         }
-    }
+
+
 }
+    }
+
